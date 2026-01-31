@@ -15,13 +15,18 @@ Simple REST API built with Express and TypeScript for the Store App. It uses a J
 
 ```text
 api/
-├── db.json              # JSON file acting as the database
+├── db.json                 # JSON file acting as the database
 ├── src/
-│   ├── index.ts         # Main application entry point and routes
-│   ├── constants.ts     # Configuration and constants
-│   └── item.ts          # TypeScript interfaces for data models
-├── package.json         # Scripts and dependencies
-└── tsconfig.json        # TypeScript configuration
+│   ├── index.ts            # Main application entry point
+│   ├── constants.ts        # Configuration and constants
+│   ├── types.ts            # TypeScript interfaces for data models
+│   ├── utils.ts            # Utility functions (file I/O)
+│   ├── controllers/
+│   │   └── itemsController.ts # Request handlers for items
+│   └── routes/
+│       └── itemsRoutes.ts   # Route definitions for items
+├── package.json            # Scripts and dependencies
+└── tsconfig.json           # TypeScript configuration
 ```
 
 ## Getting Started
@@ -52,4 +57,18 @@ Run the server using `ts-node`:
 npm run start
 ```
 
-The server will be available at `http://localhost:3001`.
+The server will be available at `http://localhost:3002`.
+
+## API Endpoints
+
+All endpoints are prefixed with `/api/v1`.
+
+### Items
+
+| Method   | Endpoint     | Description                  |
+| :------- | :----------- | :--------------------------- |
+| `GET`    | `/items`     | Retrieve all items           |
+| `GET`    | `/items/:id` | Retrieve a single item by ID |
+| `POST`   | `/items`     | Create a new item            |
+| `PUT`    | `/items/:id` | Update an existing item      |
+| `DELETE` | `/items/:id` | Delete an item               |
