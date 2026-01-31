@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import {
   readAllItems,
   readItemById,
@@ -6,13 +6,14 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/itemsController";
+import { asyncHandler } from "../middleware/asyncHandler";
 
 const router = Router();
 
-router.get("/", readAllItems);
-router.get("/:id", readItemById);
-router.post("/", createItem);
-router.put("/:id", updateItem);
-router.delete("/:id", deleteItem);
+router.get("/", asyncHandler(readAllItems));
+router.get("/:id", asyncHandler(readItemById));
+router.post("/", asyncHandler(createItem));
+router.put("/:id", asyncHandler(updateItem));
+router.delete("/:id", asyncHandler(deleteItem));
 
 export default router;
