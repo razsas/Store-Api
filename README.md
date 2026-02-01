@@ -1,39 +1,43 @@
 # Store API
 
-Simple REST API built with Express and TypeScript for the Store App. It uses a JSON file as a lightweight database.
+A robust RESTful API built with Node.js, Express, and TypeScript, serving as the backend for the Store App. It features a lightweight JSON-based database with persistence and standardized error handling.
 
 ## Technologies Used
 
-- **Node.js**: JavaScript runtime.
-- **TypeScript**: Typed superset of JavaScript.
-- **Express**: Fast, unopinionated, minimalist web framework.
-- **CORS**: Middleware to enable Cross-Origin Resource Sharing.
-- **ts-node**: TypeScript execution engine for Node.js.
-- **nodemon**: Monitor for any changes in your source and automatically restart your server.
+- **Node.js**: Modern JavaScript runtime.
+- **Express**: Fast, minimalist web framework.
+- **TypeScript**: For type-safe development and improved developer experience.
+- **CORS**: Middleware for secure Cross-Origin Resource Sharing.
+- **Nodemon**: Hot-reloading development environment.
+
+## Key Features
+
+- **Standardized Error Handling**: Centralized `errorHandler` and `asyncHandler` middleware for consistent API responses.
+- **Persistence Layer**: Custom file I/O utilities for managing the `db.json` data store.
+- **Type Safety**: Shared TypeScript interfaces to ensure data integrity across the backend.
+- **Modular Routes**: Organized routing structure for scalability.
 
 ## Project Structure
 
 ```text
 api/
-├── db.json                 # JSON file acting as the database
+├── db.json                 # Persistent data storage
 ├── src/
-│   ├── index.ts            # Main application entry point
-│   ├── constants.ts        # Configuration and constants
-│   ├── types.ts            # TypeScript interfaces for data models
-│   ├── utils.ts            # Utility functions (file I/O)
-│   ├── controllers/
-│   │   └── itemsController.ts # Request handlers for items
-│   └── routes/
-│       └── itemsRoutes.ts   # Route definitions for items
-├── package.json            # Scripts and dependencies
-└── tsconfig.json           # TypeScript configuration
+│   ├── index.ts            # Entry point & express setup
+│   ├── config.ts           # Environment configuration
+│   ├── controllers/        # Request handlers (business logic)
+│   ├── middleware/         # Async & global error handlers
+│   ├── routes/             # API route definitions
+│   ├── utils.ts            # Database I/O utilities
+│   ├── types.ts            # TypeScript data models
+│   └── constants.ts        # Reusable API constants
+├── package.json            # NPM scripts & dependencies
+└── tsconfig.json           # TypeScript build configuration
 ```
 
 ## Getting Started
 
 ### Installation
-
-Install the project dependencies:
 
 ```bash
 npm install
@@ -41,34 +45,33 @@ npm install
 
 ### Running the Project
 
-#### Development Mode
+#### Development Mode (Recommended)
 
-Run the server with automatic reload on changes:
+Automatically restarts on file changes:
 
 ```bash
 npm run dev
 ```
 
-#### Production Mode
+#### Production Build
 
-Run the server using `ts-node`:
+Compiles to JavaScript and runs the performance-optimized bundle:
 
 ```bash
-npm run start
+npm run build
+npm start
 ```
 
-The server will be available at `http://localhost:3002`.
+## API Reference
 
-## API Endpoints
+All endpoints are versioned and prefixed with `/api/v1`.
 
-All endpoints are prefixed with `/api/v1`.
-
-### Items
+### Items Management
 
 | Method   | Endpoint     | Description                  |
 | :------- | :----------- | :--------------------------- |
 | `GET`    | `/items`     | Retrieve all items           |
-| `GET`    | `/items/:id` | Retrieve a single item by ID |
-| `POST`   | `/items`     | Create a new item            |
-| `PUT`    | `/items/:id` | Update an existing item      |
-| `DELETE` | `/items/:id` | Delete an item               |
+| `GET`    | `/items/:id` | Retrieve detailed item by ID |
+| `POST`   | `/items`     | Create a new item entry      |
+| `PUT`    | `/items/:id` | Update item details          |
+| `DELETE` | `/items/:id` | Permanent item removal       |
